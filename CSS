@@ -1,0 +1,83 @@
+body {
+  width: 100%;
+  max-width: 1920px; 
+  background:url("http://kucuu.com/desktop-wallpaper-home/Black-Background-Metal-1080P-hd-wallpapers-hd-wallpaper-1920x1080-7-507f977660ef7-4632.jpg");
+  /* background-size: 100%; */
+} 
+
+h2 {
+  font: 400 40px/1.5 'Pacifico', Helvetica, sans-serif;
+  text-shadow: 3px 3px 0px black, 7px 7px 0px rgba(0,0,0,0.05);
+}
+
+.top-buffer { margin-top:80px; }
+.top-buffer2 { margin-top:100px; }
+
+.btn{
+  /*border-radius: 20px;*/
+  padding: 10px;
+  color: #cccccc;
+  width: 50px;
+  font-family: "Lucida Console", Monaco, monospace;
+}
+
+.btn:hover {
+	background: #330033;
+	color: white;
+	box-shadow: inset 0 0 0 1px white;
+}
+
+#ac:hover , #c:hover{
+	background: #660000;
+	color: white;
+	box-shadow: inset 0 0 0 1px white;
+}
+
+#percent:hover, #division:hover, #multiply:hover, #deduction:hover, #addup:hover, #equal:hover  {
+	background: #003300;
+	color: white;
+	box-shadow: inset 0 0 0 1px white;
+}
+
+.darkpink {
+  background: #E75480;
+}
+
+.darkgrey{
+  background: #1a1a1a;
+}
+
+.lightgrey{
+  background: #808080;
+}
+
+.display{
+  border: 4px solid #808080; 
+  /*border-radius: 10px; */
+  font-size: 2.0em; 
+  font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  display: inline-block;
+  margin: 0; 
+  padding: 0.1em;
+  width: 209px;
+  background: black;
+  }
+
+.container-fluid{
+  border: 2px solid black;
+  border-radius: 0.8em;
+  background: #333333;
+  width: 243px;
+  padding: 12px;
+}
+
+#r {
+  font-size: 15px;
+  bottom: 0;
+  z-index:-1;
+}
+
+.wrapper{
+  text-align:center;
+}
+
