@@ -1,0 +1,156 @@
+var myArr = [];  // array containing all input (operators included)
+var nrArr = [];  // array containing all numbers (only numbers)
+var operators = []; // array containg all operators (only operators)
+var nr = []; // array for grouped numbers
+var i,j = 0; var k, op=0; var result = 0;
+
+$(document).ready(function() {
+     $("#ac").click(cleardisplay);
+     $("#c").click(backspace);
+  
+     //Numbers bellow
+     $("#one").click({value: 1}, showAndKnow);
+     $("#two").click({value: 2}, showAndKnow);
+     $("#three").click({value: 3}, showAndKnow);
+     $("#four").click({value: 4}, showAndKnow);
+     $("#five").click({value: 5}, showAndKnow);
+     $("#six").click({value: 6}, showAndKnow); 
+     $("#seven").click({value: 7}, showAndKnow);
+     $("#eight").click({value: 8}, showAndKnow);
+     $("#nine").click({value: 9}, showAndKnow);
+     $("#zero").click({value: 0}, showAndKnow);
+     $("#doublezero").click({value: "00"}, showAndKnow);
+  
+    //Operators
+     $("#percent").click({value: "%"}, showAndKnow);
+     $("#division").click({value: "/"}, showAndKnow);
+     $("#multiply").click({value: "x"}, showAndKnow);
+     $("#deduction").click({value: "-"}, showAndKnow);
+     $("#addup").click({value: "+"}, showAndKnow);
+     $("#dot").click({value: "."}, showAndKnow);
+     $("#equal").click(calculus); 
+  
+});
+
+function cleardisplay (){  // AC button
+   $("#screen").html("0");
+   myArr= [];
+   result = 0;
+   nr = []; 
+   j = 0; op = 0; operators =[];
+}
+
+function backspace (){     // C Button
+ var theString = document.getElementById("screen").textContent;
+ if (theString.length === 1){
+    $("#screen").html(0);
+    myArr= [];
+     }else{
+     var modString = theString.slice(0,-1);
+     $("#screen").html(modString);
+     myArr= myArr.slice(0, -1); ;
+      nrArr= nrArr.slice(0, -1); ; 
+                            console.log(myArr);
+    }
+}
+
+function showAndKnow(e){ // Displays value and saves pressed key in a array
+  var onScreen = document.getElementById("screen").textContent;
+
+  
+  if (onScreen.length > 10){
+    alert("Range exceeded");
+    cleardisplay ();
+    return
+  }
+  
+  if (e.data.value === "00" && onScreen.length < 10){ // extra 0 for "00"
+     $("#screen").html(e.data.value);
+     //myArr.push(e.data.value);
+  }
+
+  if (onScreen == 0 && e.data.value !== 0 && e.data.value !== 00){
+     if (myArr.length < 11){
+     $("#screen").html(e.data.value);
+     myArr.push(e.data.value);
+                           console.log(myArr);
+     }
+  }else{
+    if (myArr.length < 11){
+    $("#screen").html(onScreen + e.data.value);
+    myArr.push(e.data.value);
+                          console.log(myArr);
+    }
+  }
+}
+
+function calculus () {
+  
+  for (i = 0 ; i < myArr.length; i++ ){
+  if (typeof(myArr[i]) === "string" && typeof(myArr[i-1]) === "string" &&
+      myArr[i] !== "00" && myArr[i-1] !== "00" || typeof(myArr[0]) === "string"){
+          result=0; myArr = [0]; nr =[0]; break;
+  }
+  //The if from above fixes a bug by returning 0 when operators are used in succession
+        
+    if (isNaN(myArr[i]) === false || myArr[i] === "."){ 
+      // checks and passes only "00" and 0-9;
+        nrArr.push(myArr[i]);
+        }else{
+        nr[j] = nrArr.join("");
+        j++;
+        nrArr = [];
+		    operators.push(myArr[i]);
+        }
+  
+        if(i === myArr.length -1 && isNaN(myArr[i]) === false){
+        nr[j] = nrArr.join("");
+        j++;
+        nrArr = [];
+    }
+    
+} //end of for loop
+
+                    // DOING THE MATH
+  
+          result = parseFloat(nr[0]);
+          for (k=0; k < nr.length; k++){
+          //SUM 
+          if (operators[op] === "+" && k !== nr.length -1){
+          result = result +parseFloat(nr[k+1]);
+          }
+
+          //SUBTRACTION
+          if (operators[op] === "-" && k !== nr.length -1){
+          result = result - parseFloat(nr[k+1]);
+          }
+
+          //MULTIPLY
+          if (operators[op] === "x" && k !== nr.length -1){
+          result = result * parseFloat(nr[k+1]);
+          }
+
+          //DIVISION
+           if (operators[op] === "/" && k !== nr.length -1){
+          result = result / parseFloat(nr[k+1]);
+          }
+
+          // PERCENT
+           if (operators[op] === "%" && k !== nr.length -1){
+          result = (result/100) * parseFloat(nr[k+1]);
+          }
+        
+        op++; 
+      } //end of math for loop
+  
+  
+    console.log(result);  
+    $("#screen").html(Math.floor(result*100)/100);
+    myArr = [result];
+result = 0; nr = []; j = 0; op = 0;operators = [];
+  
+}//end of calculus
+
+
+
+
